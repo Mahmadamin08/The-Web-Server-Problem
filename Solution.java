@@ -27,9 +27,9 @@ public class Solution {
 
     public static void main(String[] args) throws IOException {
 
-        File inputFile = new File("Small_input.txt");
+        File inputFile = new File("Large_input.txt");
 
-        File outputFile = new File("Small_output.txt");
+        File outputFile = new File("Large_output.txt");
         FileInputStream inputStream = new FileInputStream(inputFile);
         FileOutputStream outputStream = new FileOutputStream(outputFile);
         PrintWriter writer = new PrintWriter(outputStream);
@@ -43,13 +43,14 @@ public class Solution {
         }
         sol.websites
                 .sort(Comparator.comparing((WebSite w) -> w.content)
-                        .thenComparing((WebSite a, WebSite b) -> b.images - a.images));
+                        .thenComparing((WebSite a, WebSite b) -> b.images - a.images)
+                        .thenComparing((WebSite w) -> w.forms));
         for (int i = 0; i < sol.websites.size(); i++) {
             WebSite w = sol.websites.get(i);
             if (i == sol.websites.size() - 1)
-                writer.print(w.content + " " + w.images + " " + w.forms);
+                writer.print(w.content + "," + w.images + "," + w.forms);
             else
-                writer.println(w.content + " " + w.images + " " + w.forms);
+                writer.println(w.content + "," + w.images + "," + w.forms);
         }
         sc.close();
         writer.close();
